@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+//using System.Diagnostics;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class BulletController : MonoBehaviour, IApplyDamage
 {
     public float verticalSpeed;
     public float verticalBoundary;
     public BulletManager bulletManager;
+    public int damage;
     
     // Start is called before the first frame update
     void Start()
@@ -32,5 +34,16 @@ public class BulletController : MonoBehaviour
         {
             bulletManager.ReturnBullet(gameObject);
         }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        //Debug.Log(other.gameObject.name);
+        bulletManager.ReturnBullet(gameObject);
+    }
+
+    public int ApplyDamage()
+    {
+        return damage;
     }
 }
